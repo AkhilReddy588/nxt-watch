@@ -2,6 +2,8 @@ LOGIN CREDENTIALS:
 <P>username : rahul</P>
 <p>pasword : rahul@2021</p>
 
+URL : <a href="https://akhilnxtwatch58.ccbp.tech/" target="_blank">akhilnxtwatch58.ccbp.tech</a>
+
 ### Design Files
 
 <details>
