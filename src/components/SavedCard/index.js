@@ -19,17 +19,10 @@ function formatYearsAgo(date) {
   return `${diffInYears} ${diffInYears === 1 ? 'year' : 'years'} ago`
 }
 
-const VideoCard = props => {
+const SavedCard = props => {
   const {data} = props
-  const updatedData = {
-    id: data.id,
-    channel: data.channel,
-    publishedAt: data.published_at,
-    thumbnailUrl: data.thumbnail_url,
-    title: data.title,
-    viewCount: data.view_count,
-  }
-  const {channel, publishedAt, thumbnailUrl, title, viewCount, id} = updatedData
+  console.log(data)
+  const {channel, publishedAt, thumbnailUrl, title, viewCount, id} = data
   const updatedChannel = {
     name: channel.name,
     profileImageUrl: channel.profile_image_url,
@@ -48,7 +41,7 @@ const VideoCard = props => {
             <VideoCardContainer>
               <Thumbnail src={thumbnailUrl} alt="video thumbnail" />
               <VideoContent>
-                <ProfileImg src={profileImageUrl} alt="channel logo" />
+                <ProfileImg src={profileImageUrl} alt="channel profile" />
                 <div>
                   <Title darkTheme={isDarkTheme}>{title}</Title>
                   <ViewsDetails>
@@ -70,4 +63,4 @@ const VideoCard = props => {
   )
 }
 
-export default VideoCard
+export default SavedCard

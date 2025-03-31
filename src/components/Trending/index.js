@@ -1,33 +1,26 @@
 import {Component} from 'react'
-import {IoMdClose} from 'react-icons/io'
-import {IoSearch} from 'react-icons/io5'
 import Loader from 'react-loader-spinner'
 import Cookies from 'js-cookie'
+import {HiFire} from 'react-icons/hi'
 import Header from '../Header'
 import SideBar from '../SideBar'
-import VideoCard from '../VideoCard'
+import TrendingCard from '../TrendingCard'
 import ThemeContext from '../../context/ThemeContext'
 import {
-  HomeContainer,
+  TrendContainer,
   WrapContainer,
-  HomeContent,
-  Banner,
-  BannerTop,
-  BannerLogo,
-  BannerText,
-  CloseBtn,
-  SearchForm,
-  GetBtn,
+  TrendContent,
+  TrendHeader,
   VideoSection,
-  SearchInput,
-  SearchIcon,
   VideosContainer,
   NoVideos,
   NoVideosImg,
   NoVideosPara,
   NoVideosHeading,
   RetryBtn,
+  FireSymbol,
   LoadingView,
+  TrendFireHeading,
 } from './styledComponents'
 
 const apiStatusConstants = {
@@ -37,11 +30,8 @@ const apiStatusConstants = {
   initial: 'INITIAL',
 }
 
-class Home extends Component {
+class Trending extends Component {
   state = {
-    showBanner: true,
-    searchValue: '',
-    finalSearchValue: '',
     videosData: [],
     apiStatus: apiStatusConstants.initial,
   }
@@ -49,24 +39,13 @@ class Home extends Component {
   componentDidMount() {
     this.getVideos()
     const {changeTab} = this.context
-    changeTab('HOME')
-  }
-
-  closeBanner = () => this.setState({showBanner: false})
-
-  changeSearchValue = event => this.setState({searchValue: event.target.value})
-
-  onSearching = event => {
-    event.preventDefault()
-    const {searchValue} = this.state
-    this.setState({finalSearchValue: searchValue}, this.getVideos)
+    changeTab('TRENDING')
   }
 
   getVideos = async () => {
     this.setState({apiStatus: apiStatusConstants.inProgress})
-    const {finalSearchValue} = this.state
     const jwtToken = Cookies.get('jwt_token')
-    const url = `https://apis.ccbp.in/videos/all?search=${finalSearchValue}`
+    const url = `https://apis.ccbp.in/videos/trending`
     const options = {
       method: 'GET',
       headers: {
@@ -116,7 +95,7 @@ class Home extends Component {
     return (
       <VideosContainer>
         {videosData.map(eachItem => (
-          <VideoCard data={eachItem} key={eachItem.id} />
+          <TrendingCard data={eachItem} key={eachItem.id} />
         ))}
       </VideosContainer>
     )
@@ -154,7 +133,7 @@ class Home extends Component {
   )
 
   render() {
-    const {showBanner, searchValue, apiStatus} = this.state
+    const {apiStatus} = this.state
     let renderValue
 
     switch (apiStatus) {
@@ -177,50 +156,23 @@ class Home extends Component {
           const {isDarkTheme} = value
 
           return (
-            <HomeContainer data-testid="home" darkTheme={isDarkTheme}>
+            <TrendContainer data-testid="home" darkTheme={isDarkTheme}>
               <Header />
               <WrapContainer>
                 <SideBar />
-                <HomeContent>
-                  {showBanner && (
-                    <Banner data-testid="banner">
-                      <BannerTop>
-                        <BannerLogo
-                          src="https://assets.ccbp.in/frontend/react-js/nxt-watch-logo-light-theme-img.png"
-                          alt="nxt watch logo"
-                        />
-                        <CloseBtn
-                          data-testid="close"
-                          type="button"
-                          onClick={this.closeBanner}
-                        >
-                          <IoMdClose />
-                        </CloseBtn>
-                      </BannerTop>
-                      <BannerText>
-                        Buy Nxt Watch Premium prepaid plans with UPI
-                      </BannerText>
-                      <GetBtn>GET IT NOW</GetBtn>
-                    </Banner>
-                  )}
-                  <VideoSection>
-                    <SearchForm onSubmit={this.onSearching}>
-                      <SearchInput
-                        darkTheme={isDarkTheme}
-                        value={searchValue}
-                        onChange={this.changeSearchValue}
-                        type="search"
-                        placeholder="Search"
-                      />
-                      <SearchIcon data-testid="searchButton" type="submit">
-                        <IoSearch />
-                      </SearchIcon>
-                    </SearchForm>
-                    {renderValue}
-                  </VideoSection>
-                </HomeContent>
+                <TrendContent>
+                  <TrendHeader>
+                    <FireSymbol darkTheme={isDarkTheme}>
+                      <HiFire />
+                    </FireSymbol>
+                    <TrendFireHeading darkTheme={isDarkTheme}>
+                      Trending
+                    </TrendFireHeading>
+                  </TrendHeader>
+                  <VideoSection>{renderValue}</VideoSection>
+                </TrendContent>
               </WrapContainer>
-            </HomeContainer>
+            </TrendContainer>
           )
         }}
       </ThemeContext.Consumer>
@@ -228,6 +180,6 @@ class Home extends Component {
   }
 }
 
-Home.contextType = ThemeContext
+Trending.contextType = ThemeContext
 
-export default Home
+export default Trending

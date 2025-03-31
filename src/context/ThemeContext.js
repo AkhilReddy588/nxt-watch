@@ -5,6 +5,9 @@ const ThemeContext = React.createContext({
   changeTheme: () => {},
   activeTab: 'HOME',
   changeTab: () => {},
+  savedList: [],
+  addToSavedList: () => {},
+  removeFromSavedList: () => {},
 })
 
 export default ThemeContext

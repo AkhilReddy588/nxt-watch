@@ -1,3 +1,4 @@
+import {Link} from 'react-router-dom'
 import {FaMoon} from 'react-icons/fa'
 import {FiSun} from 'react-icons/fi'
 import {GiHamburgerMenu} from 'react-icons/gi'
@@ -39,9 +40,12 @@ const Header = props => {
           : 'https://assets.ccbp.in/frontend/react-js/nxt-watch-logo-light-theme-img.png'
         return (
           <HeaderContainer>
-            <LogoImage src={logoUrl} alt="home logo" />
+            <Link className="nav-link" to="/">
+              <LogoImage src={logoUrl} alt="website logo" />
+            </Link>
             <DesktopNav>
               <ThemeButton
+                data-testid="theme"
                 type="button"
                 onClick={() => changeTheme()}
                 darkTheme={isDarkTheme}
@@ -79,6 +83,7 @@ const Header = props => {
             </DesktopNav>
             <MobileNav>
               <ThemeButton
+                data-testid="theme"
                 type="button"
                 onClick={() => changeTheme()}
                 darkTheme={isDarkTheme}
@@ -94,18 +99,26 @@ const Header = props => {
                 position="bottom right"
               >
                 <MobileMenuBar darkTheme={isDarkTheme}>
-                  <MenuItem darkTheme={isDarkTheme} type="button">
-                    Home
-                  </MenuItem>
-                  <MenuItem darkTheme={isDarkTheme} type="button">
-                    Trending
-                  </MenuItem>
-                  <MenuItem darkTheme={isDarkTheme} type="button">
-                    Gaming
-                  </MenuItem>
-                  <MenuItem darkTheme={isDarkTheme} type="button">
-                    Saved Videos
-                  </MenuItem>
+                  <Link className="nav-link" to="/">
+                    <MenuItem darkTheme={isDarkTheme} type="button">
+                      Home
+                    </MenuItem>
+                  </Link>
+                  <Link className="nav-link" to="/trending">
+                    <MenuItem darkTheme={isDarkTheme} type="button">
+                      Trending
+                    </MenuItem>
+                  </Link>
+                  <Link className="nav-link" to="/gaming">
+                    <MenuItem darkTheme={isDarkTheme} type="button">
+                      Gaming
+                    </MenuItem>
+                  </Link>
+                  <Link className="nav-link" to="/saved-videos">
+                    <MenuItem darkTheme={isDarkTheme} type="button">
+                      Saved Videos
+                    </MenuItem>
+                  </Link>
                 </MobileMenuBar>
               </Popup>
               <Popup

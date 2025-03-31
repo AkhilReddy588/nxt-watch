@@ -1,6 +1,8 @@
+import {Link} from 'react-router-dom'
 import {MdHome, MdPlaylistAdd} from 'react-icons/md'
 import {HiFire} from 'react-icons/hi'
 import {SiYoutubegaming} from 'react-icons/si'
+import './index.css'
 
 import {
   LinkItem,
@@ -11,8 +13,6 @@ import {
 
 import ThemeContext from '../../context/ThemeContext'
 
-import './index.css'
-
 const tabs = {
   home: 'HOME',
   trending: 'TRENDING',
@@ -21,7 +21,7 @@ const tabs = {
   none: 'NONE',
 }
 
-const SideBar = props => {
+const SideBar = () => {
   const activeIconStyle = 'active-icon'
   return (
     <ThemeContext.Consumer>
@@ -30,62 +30,70 @@ const SideBar = props => {
         return (
           <div className="desktop-sidebar">
             <div className="pages">
-              <LinkItem
-                active={activeTab === tabs.home}
-                darkTheme={isDarkTheme}
-                onClick={() => changeTab(tabs.home)}
-              >
-                <div className="link-item">
-                  <MdHome
-                    className={`link-icon ${
-                      activeTab === tabs.home ? activeIconStyle : ''
-                    }`}
-                  />
-                  <LinkText className="link-txt">Home</LinkText>
-                </div>
-              </LinkItem>
-              <LinkItem
-                darkTheme={isDarkTheme}
-                active={activeTab === tabs.trending}
-                onClick={() => changeTab(tabs.trending)}
-              >
-                <div className="link-item">
-                  <HiFire
-                    className={`link-icon ${
-                      activeTab === tabs.trending ? activeIconStyle : ''
-                    }`}
-                  />
-                  <LinkText className="link-txt">Trending</LinkText>
-                </div>
-              </LinkItem>
-              <LinkItem
-                darkTheme={isDarkTheme}
-                active={activeTab === tabs.gaming}
-                onClick={() => changeTab(tabs.gaming)}
-              >
-                <div className="link-item">
-                  <SiYoutubegaming
-                    className={`link-icon ${
-                      activeTab === tabs.gaming ? activeIconStyle : ''
-                    }`}
-                  />
-                  <LinkText className="link-txt">Gaming</LinkText>
-                </div>
-              </LinkItem>
-              <LinkItem
-                darkTheme={isDarkTheme}
-                active={activeTab === tabs.savedVideos}
-                onClick={() => changeTab(tabs.savedVideos)}
-              >
-                <div className="link-item">
-                  <MdPlaylistAdd
-                    className={`link-icon ${
-                      activeTab === tabs.savedVideos ? activeIconStyle : ''
-                    }`}
-                  />
-                  <LinkText className="link-txt">Saved Videos</LinkText>
-                </div>
-              </LinkItem>
+              <Link className="nav-link" to="/">
+                <LinkItem
+                  active={activeTab === tabs.home}
+                  darkTheme={isDarkTheme}
+                  onClick={() => changeTab(tabs.home)}
+                >
+                  <div className="link-item">
+                    <MdHome
+                      className={`link-icon ${
+                        activeTab === tabs.home ? activeIconStyle : ''
+                      }`}
+                    />
+                    <LinkText className="link-txt">Home</LinkText>
+                  </div>
+                </LinkItem>
+              </Link>
+              <Link to="trending" className="nav-link">
+                <LinkItem
+                  darkTheme={isDarkTheme}
+                  active={activeTab === tabs.trending}
+                  onClick={() => changeTab(tabs.trending)}
+                >
+                  <div className="link-item">
+                    <HiFire
+                      className={`link-icon ${
+                        activeTab === tabs.trending ? activeIconStyle : ''
+                      }`}
+                    />
+                    <LinkText className="link-txt">Trending</LinkText>
+                  </div>
+                </LinkItem>
+              </Link>
+              <Link className="nav-link" to="/gaming">
+                <LinkItem
+                  darkTheme={isDarkTheme}
+                  active={activeTab === tabs.gaming}
+                  onClick={() => changeTab(tabs.gaming)}
+                >
+                  <div className="link-item">
+                    <SiYoutubegaming
+                      className={`link-icon ${
+                        activeTab === tabs.gaming ? activeIconStyle : ''
+                      }`}
+                    />
+                    <LinkText className="link-txt">Gaming</LinkText>
+                  </div>
+                </LinkItem>
+              </Link>
+              <Link className="nav-link" to="/saved-videos">
+                <LinkItem
+                  darkTheme={isDarkTheme}
+                  active={activeTab === tabs.savedVideos}
+                  onClick={() => changeTab(tabs.savedVideos)}
+                >
+                  <div className="link-item">
+                    <MdPlaylistAdd
+                      className={`link-icon ${
+                        activeTab === tabs.savedVideos ? activeIconStyle : ''
+                      }`}
+                    />
+                    <LinkText className="link-txt">Saved Videos</LinkText>
+                  </div>
+                </LinkItem>
+              </Link>
             </div>
             <div className="contact-section">
               <ContactHeading darkTheme={isDarkTheme}>

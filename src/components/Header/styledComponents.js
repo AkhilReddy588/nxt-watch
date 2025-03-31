@@ -103,6 +103,7 @@ export const MobileLogout = styled.button`
   cursor: pointer;
 `
 export const MobileMenuBar = styled.div`
+  list-style-type: none;
   display: flex;
   flex-direction: column;
   box-shadow: ${props =>
